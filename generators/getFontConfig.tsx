@@ -21,13 +21,25 @@ export const getFontConfig = (
     })
   }
 
-  if (arrayCheck(preloadConfig)) {
-    preloadConfig.forEach(href => {
-      headComponents.push(
-        <link key={`preload-${href}`} rel="preload" as="style" href={href} />
-      )
-    })
-  }
+  // if (arrayCheck(preloadConfig)) {
+  //   preloadConfig.forEach(href => {
+  //     headComponents.push(
+  //       <link key={`preload-${href}`} rel="stylesheet" href={href} />
+  //     )
+  //   })
+  // }
+
+  // // APPROACH I
+  // // According to https://pagespeedchecklist.com/asynchronous-google-fonts
+  // // Uncomment these lines to "optionally increase loading priority"
+  // if (arrayCheck(preloadConfig)) {
+  //   preloadConfig.forEach((href) => {
+  //     headComponents.push(
+  //       <link key={`preload-${href}`} rel="preload" as="style" href={href} />
+  //     );
+  //   });
+  // }
+
 
   if (arrayCheck(renderBlockingFonts)) {
     renderBlockingFonts.forEach(({ name, file }) => {
