@@ -10,18 +10,31 @@ export const AsyncFonts: React.FC<{ hrefs: string[] }> = ({ hrefs }) => {
         key={`noscript-${href}`}
       >{`<link rel="stylesheet" href="${href}" />`}</noscript>
     )
+    
+    // // APPROACH I
+    // // According to https://pagespeedchecklist.com/asynchronous-google-fonts
+    // const link = (
+    //   <link
+    //     key={`stylesheet-${href}`}
+    //     rel="stylesheet"
+    //     media="print"
+    //     onLoad={`this.onload=null;this.removeAttribute('media');`}
+    //     href={href}
+    //   />
+    // );
+
+    // APPROACH II
+    // According to https://blog.prototyp.digital/improving-website-performance-by-eliminating-render-blocking-css-and-javascript/
     const link = (
       <link
         key={`stylesheet-${href}`}
-        rel="stylesheet"
-        media="print"
-        onLoad={`this.onload=null;this.removeAttribute('media');`}
+        crossOrigin="true"
+        as="style"
+        rel="preload"
+        onLoad={`this.onload=null;this.rel='stylesheet'`}
         href={href}
       />
-    )
-
-    links.push([noScript, link])
-  })
+    );
 
   return <Helmet>{links}</Helmet>
 }
