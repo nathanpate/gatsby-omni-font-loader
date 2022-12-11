@@ -35,7 +35,7 @@ export const AsyncFonts: React.FC<{ hrefs: string[] }> = ({ hrefs }) => {
         href={href}
       />
     );
-
-    return <Helmet>{links}</Helmet>
-  })
+    links.push([noScript, link]);
+  });
+  return <Helmet>{links}</Helmet>
 }
